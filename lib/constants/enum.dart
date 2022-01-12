@@ -1,0 +1,1 @@
+enum ConnectivityEnum { Wifi, Mobile }

@@ -78,12 +78,6 @@ class _ThirdScreenState extends State<ThirdScreen> {
                 )
               ],
             ),
-            SizedBox(height: 15),
-            MaterialButton(
-              onPressed: () {},
-              color: widget.color,
-              child: Text('Go to Forth screen'),
-            ),
           ],
         ),
       ),

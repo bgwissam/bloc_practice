@@ -17,6 +17,7 @@ dependencies:
   test: ^1.20.1
   bloc_test: ^9.0.2
   equatable: ^2.0.3
+  connectivity: ^3.0.6
 
   cupertino_icons: ^0.1.3
 
