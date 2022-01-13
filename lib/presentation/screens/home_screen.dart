@@ -16,21 +16,26 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext blocContext) {
     return BlocListener<InternetCubit, InternetState>(
-      listener: (context, state) {
+      listener: (listenerContext, state) {
         if (state is InternetConnected &&
             state.connectivityType == ConnectivityEnum.Wifi) {
-          BlocProvider.of<CounterCubit>(context).increment();
+          listenerContext.read<CounterCubit>().increment();
         } else if (state is InternetConnected &&
             state.connectivityType == ConnectivityEnum.Mobile) {
-          BlocProvider.of<CounterCubit>(context).decrement();
+          listenerContext.read<CounterCubit>().decrement();
         }
       },
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
           backgroundColor: widget.color,
+          actions: [
+            IconButton(
+                onPressed: () => Navigator.pushNamed(context, '/settings'),
+                icon: Icon(Icons.settings))
+          ],
         ),
         body: Center(
           child: Column(
@@ -108,19 +113,61 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: Theme.of(context).textTheme.headline4);
                 },
               ),
+              SizedBox(
+                height: 20,
+              ),
+              //testing bloc.watch function
+              Builder(builder: (context) {
+                final _counterState = context.watch<CounterCubit>().state;
+                final _internetState = context.watch<InternetCubit>().state;
+                if (_internetState is InternetConnected &&
+                    _internetState.connectivityType == ConnectivityEnum.Wifi) {
+                  return Text(
+                      'Counter: ${_counterState.counterValue} Internet: WIFI',
+                      style: textStyle1);
+                } else if (_internetState is InternetConnected &&
+                    _internetState.connectivityType ==
+                        ConnectivityEnum.Mobile) {
+                  return Text(
+                      'Counter: ${_counterState.counterValue} Internet: MOBILE',
+                      style: textStyle1);
+                } else if (_internetState is InternetDisconnected) {
+                  return Text(
+                      'Counter: ${_counterState.counterValue} Internet: DISCONNECTED',
+                      style: textStyle1);
+                } else {
+                  return Text(
+                      'Counter: ${_counterState.counterValue} Internet: Unknown',
+                      style: textStyle1);
+                }
+              }),
+              SizedBox(
+                height: 20,
+              ),
+              //testing block select function
+              Builder(builder: (context) {
+                final _counterValue = context
+                    .select((CounterCubit cubit) => cubit.state.counterValue);
+                return Text('Counter $_counterValue', style: textStyle1);
+              }),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FloatingActionButton(
+                    heroTag: 'btn1',
                     onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).decrement();
+                      blocContext.read<CounterCubit>().decrement();
                     },
                     tooltip: 'Decrement',
                     child: Icon(Icons.remove),
                   ),
                   FloatingActionButton(
+                    heroTag: 'btn2',
                     onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).increment();
+                      blocContext.read<CounterCubit>().increment();
                     },
                     tooltip: 'Increment',
                     child: Icon(Icons.add),

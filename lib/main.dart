@@ -3,9 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cubit_bloc_tutorial/logic/cubit/counter_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cubit_bloc_tutorial/logic/cubit/internet_cubit.dart';
+import 'package:flutter_cubit_bloc_tutorial/logic/cubit/settings_cubit.dart';
 import 'package:flutter_cubit_bloc_tutorial/presentation/router/app_router.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  HydratedStorage _storage = await HydratedStorage.build(
+      storageDirectory: await getApplicationSupportDirectory());
+
   runApp(MyApp(
     appRouter: AppRouter(),
     connectivity: Connectivity(),
@@ -28,6 +36,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<CounterCubit>(
           create: (context) => CounterCubit(),
         ),
+        BlocProvider<SettingsCubit>(
+          create: (context) => SettingsCubit(),
+        )
       ],
       child: MaterialApp(
         title: 'Bloc Counter Demo',

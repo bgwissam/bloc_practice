@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cubit_bloc_tutorial/logic/cubit/counter_cubit.dart';
 import 'package:flutter_cubit_bloc_tutorial/presentation/screens/home_screen.dart';
 import 'package:flutter_cubit_bloc_tutorial/presentation/screens/second_screen.dart';
+import 'package:flutter_cubit_bloc_tutorial/presentation/screens/settings_screen.dart';
 import 'package:flutter_cubit_bloc_tutorial/presentation/screens/third_screen.dart';
 
 class AppRouter {
@@ -30,6 +31,8 @@ class AppRouter {
           ),
         );
         break;
+      case '/settings':
+        return MaterialPageRoute(builder: (_) => SettingsScreen());
 
       default:
         return null;
