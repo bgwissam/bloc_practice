@@ -2,7 +2,7 @@ import 'package:flutter_cubit_bloc_tutorial/logic/cubit/counter_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:test/test.dart';
 
-void main(List<String> args) {
+void main() {
   group('CounterCubit', () {
     CounterCubit counterCubit;
 

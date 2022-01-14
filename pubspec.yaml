@@ -7,7 +7,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.7.0 <3.0.0'
+  sdk: '>=2.8.0 <3.3.0'
 
 dependencies:
   flutter:
@@ -19,7 +19,7 @@ dependencies:
   hydrated_bloc: ^8.0.0
   equatable: ^2.0.3
   connectivity: ^3.0.6
-  path_provider: ^2.0.0
+  #path_provider: ^2.0.0
   
   cupertino_icons: ^0.1.3
 
