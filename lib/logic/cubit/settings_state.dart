@@ -14,6 +14,10 @@ class SettingsState {
         appNotifications: appNotifications ?? this.appNotifications,
         emailNotifications: emailNotifications ?? this.emailNotifications);
   }
+
+  @override
+  String toString() =>
+      'SettingsState(appNotifications: $appNotifications, emailNotifications: $emailNotifications)';
 }
 
 class SettingsInitial extends SettingsState {}

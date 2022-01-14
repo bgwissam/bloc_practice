@@ -1,6 +1,6 @@
 part of 'internet_cubit.dart';
 
-abstract class InternetState extends Equatable {
+class InternetState extends Equatable {
   const InternetState();
 
   @override
@@ -13,6 +13,9 @@ class InternetConnected extends InternetState {
   final ConnectivityEnum connectivityType;
 
   InternetConnected({@required this.connectivityType});
+
+  @override
+  String toString() => 'InternetConnected(connectivityType: $connectivityType)';
 }
 
 class InternetDisconnected extends InternetState {}

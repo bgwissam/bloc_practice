@@ -22,4 +22,5 @@ class CounterCubit extends Cubit<CounterState> {
   // Map<String, dynamic> toJson(CounterState state) {
   //   return state.toMap();
   // }
+
 }
